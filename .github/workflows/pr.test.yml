@@ -1,11 +1,9 @@
-name: 'PR: Test'
-
-on:
-  pull_request:
-    types: [opened, synchronize]
-
 jobs:
   test:
     uses: ./.github/workflows/generic.test.yml
     with:
       plugin_name: multiverse-core
+name: 'PR: Test'
+on:
+  repository_dispatch:
+    types: trigger-ga___pr.test.yml

@@ -1,18 +1,16 @@
-name: 'PR: Require Label'
-
-on:
-  pull_request:
-    types: [opened, labeled, unlabeled, synchronize]
-    branches: [main]
-
 jobs:
   require_label:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - uses: mheap/github-action-required-labels@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          mode: exactly
-          count: 1
-          labels: "release:major, release:minor, release:patch, no release"
+    - continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: mheap/github-action-required-labels@v2
+      with:
+        count: 1
+        labels: release:major, release:minor, release:patch, no release
+        mode: exactly
+name: 'PR: Require Label'
+on:
+  repository_dispatch:
+    types: trigger-ga___pr.require_label.yml

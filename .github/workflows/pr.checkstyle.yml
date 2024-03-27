@@ -1,9 +1,7 @@
-name: 'PR: Checkstyle'
-
-on:
-  pull_request:
-    types: [opened, synchronize]
-
 jobs:
   checkstyle:
     uses: ./.github/workflows/generic.checkstyle.yml
+name: 'PR: Checkstyle'
+on:
+  repository_dispatch:
+    types: trigger-ga___pr.checkstyle.yml
